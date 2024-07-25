@@ -1,0 +1,114 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 120  # Short column limits are dated and limiting in C++ when trying to be explicit. Use common sense.
+BreakBeforeBraces: Custom  # Like Stroustrup, but don't wrap after function calls
+BraceWrapping:
+      BeforeCatch: true
+      BeforeElse: true
+BreakAfterAttributes: Leave
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeColon
+BreakBeforeConceptDeclarations: Always
+BreakInheritanceList: AfterComma
+LambdaBodyIndentation: Signature
+
+Standard: Auto  # (Non-Deviation) Detect standard version to avoid issues in legacy code
+
+# rules that cause more substantial source changes
+UseCRLF: false  # (Non-Deviation) Source Files should always use LF line endings for portability!
+UseTab: Never  # (Non-Deviation) Stick to a single whitespace style within a file!
+LineEnding: LF # force LF line endings for source code
+DerivePointerAlignment: false  # (Non-Deviation) Obey style guide since this is not a breaking change
+ReflowComments: true  # (Non-Deviation) Obey style guide since this is not a breaking change
+SortIncludes: Never
+FixNamespaceComments: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: false  # a function call’s arguments will either be all on the same line or will have one line each
+BinPackParameters: false  # a function declaration’s or function definition’s parameters will either all be on the same line or will have one line each.
+PackConstructorInitializers: NextLine
+
+### empty lines and space related style
+MaxEmptyLinesToKeep: 2
+SeparateDefinitionBlocks: Always
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+InsertNewlineAtEOF: true
+
+### Indention related rules
+IndentWidth: 4  # a compromise between 2 and 8
+AccessModifierOffset: -4  # Access modifiers with no indent over parent class. LLVM style.
+NamespaceIndentation: All  # Indent namespaces to make hierarchy more explicit
+IndentPPDirectives: None  # (Non-Deviation)
+IndentExternBlock: NoIndent
+ConstructorInitializerIndentWidth: 4  # (Non-Deviation)
+ContinuationIndentWidth: 4  # (Non-Deviation)
+
+### Code Alignment rules
+PointerAlignment: Left  # (Non-Deviation) Pointer is part of the type, so keep with the type-name
+AlignTrailingComments: true  # Documentation comments for many assignments in a row to line up
+AlignAfterOpenBracket: Align  # break between each argument if we must break
+AlignConsecutiveBitFields: Consecutive
+AlignConsecutiveMacros: Consecutive
+AlignEscapedNewlines: Right
+AlignOperands: AlignAfterOperator
+AlignConsecutiveShortCaseStatements:
+      Enabled: true
+      AcrossEmptyLines: false
+      AcrossComments: false
+      AlignCaseColons: true
+AlignConsecutiveAssignments:
+      Enabled: true
+      AcrossComments: true
+      AcrossEmptyLines: false
+
+### Rules to allow or ban compressing code to one line
+AllowShortBlocksOnASingleLine: Empty  # allow empty blocks on one line for common polling patterns in blocking APIs
+AllowShortCaseLabelsOnASingleLine: true  # (Deviation)
+AllowShortFunctionsOnASingleLine: Empty  # Only empty functions. Single line functions with any code can make debugging and trace difficult.
+AllowShortLambdasOnASingleLine: All  # (Non-Deviation) lambdas are a special case since they are often assigned to variables
+AllowShortIfStatementsOnASingleLine: Never  # Distinct lines are better for trace and debug
+AllowShortLoopsOnASingleLine: false  # Distinct lines are better for trace and debug
+
+### Heuristics to tell clang-format where to break long lines
+PenaltyExcessCharacter: 100
+PenaltyBreakFirstLessLess: 500
+PenaltyBreakAssignment: 1000
+PenaltyBreakComment: 200
+PenaltyBreakString: 1000
+
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 50
+PenaltyBreakTemplateDeclaration: 100
+PenaltyBreakBeforeFirstCallParameter: 1000
+
+
+### Rules related to whitespace within statements
+BitFieldColonSpacing: Both
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeJsonColon: true
+SpaceBeforeParens: ControlStatementsExceptControlMacros
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
+SpacesInConditionalStatement: false
+SpacesInContainerLiterals: true
+SpacesInLineCommentPrefix:
+      Minimum: 1
+      Maximum: -1
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
