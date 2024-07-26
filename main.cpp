@@ -46,7 +46,23 @@ int main(int argc, char* argv[]) {
 }
 
 bool test_function(int argc, char* argv[]) {
-    return argc > 1;
+    TaskHandle_t h = nullptr;
+    const auto r = xTaskCreate(
+        [](void*) {
+            for(unsigned i = 0;; ++i) {
+                std::cerr << std::format("TEST1: Iteration {}\n", i);
+                vTaskDelay(100);
+            }
+        },
+        "test1",
+        test_stack_size,
+        nullptr,
+        1,
+        &h);
+    configASSERT(r == pdTRUE);
+    vTaskDelay(500);
+    vTaskDelete(h);
+    return true;
 }
 
 extern "C" {
@@ -59,31 +75,5 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName) {
     std::cerr << std::format("\n[CRITICAL] Stack overflow in {}\n", pcTaskName == nullptr ? "unknown" : pcTaskName);
     std::terminate();
 }
-
-#if configSUPPORT_STATIC_ALLOCATION
-
-void vApplicationGetIdleTaskMemory(StaticTask_t** ppxIdleTaskTCBBuffer,
-                                   StackType_t** ppxIdleTaskStackBuffer,
-                                   configSTACK_DEPTH_TYPE* pulIdleTaskStackSize) {
-    static StaticTask_t xIdleTaskTCB;
-    static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
-    *ppxIdleTaskTCBBuffer   = &xIdleTaskTCB;
-    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
-    *pulIdleTaskStackSize   = configMINIMAL_STACK_SIZE;
-}
-#endif  // configSUPPORT_STATIC_ALLOCATION
-#if configUSE_TIMERS
-
-void vApplicationGetTimerTaskMemory(StaticTask_t** ppxTimerTaskTCBBuffer,
-                                    StackType_t** ppxTimerTaskStackBuffer,
-                                    configSTACK_DEPTH_TYPE* pulTimerTaskStackSize) {
-    static StaticTask_t xTimerTaskTCB;
-    static StackType_t uxTimerTaskStack[configTIMER_TASK_STACK_DEPTH];
-    *ppxTimerTaskTCBBuffer   = &xTimerTaskTCB;
-    *ppxTimerTaskStackBuffer = uxTimerTaskStack;
-    *pulTimerTaskStackSize   = configTIMER_TASK_STACK_DEPTH;
-}
-
-#endif  // configUSE_TIMERS
 
 }  // extern "C"
