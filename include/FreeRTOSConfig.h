@@ -28,7 +28,7 @@ PRIORITY THAN THIS! (higher priorities are lower numeric values. */
 #define configMAX_TASK_NAME_LEN                                 (6)
 #define configENABLE_BACKWARD_COMPATIBILITY                     (0)
 
-#define configSUPPORT_STATIC_ALLOCATION                         (0)
+#define configSUPPORT_STATIC_ALLOCATION                         (1)
 
 #define configUSE_MUTEXES                                       (1)
 #define configUSE_RECURSIVE_MUTEXES                             (1)
@@ -46,10 +46,14 @@ PRIORITY THAN THIS! (higher priorities are lower numeric values. */
 #define configTIMER_QUEUE_LENGTH                                10
 
 /* Optional functions - most linkers will remove unused functions anyway. */
-#define INCLUDE_vTaskDelete                                     1
-#define INCLUDE_vTaskSuspend                                    1
-#define INCLUDE_vTaskDelayUntil                                 1
-#define INCLUDE_vTaskDelay                                      1
+#define INCLUDE_vTaskDelete                                     (1)
+#define INCLUDE_vTaskSuspend                                    (1)
+#define INCLUDE_vTaskDelayUntil                                 (1)
+#define INCLUDE_vTaskDelay                                      (1)
+#define INCLUDE_uxTaskGetStackHighWaterMark                     (1)
+#define INCLUDE_vTaskPrioritySet                                (1)
+#define INCLUDE_uxTaskPriorityGet                               (1)
+#define INCLUDE_eTaskGetState                                   (1)
 
 #ifdef __cplusplus
 extern "C" {
